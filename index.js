@@ -1,16 +1,14 @@
-Array.prototype.myMap = function(handle){
-  let arr = [];
-  let length = this.length;
-  for(let i = 0; i < length; i++){
-    arr.push(handle(this[i], i, this));
-  }
-  return arr;
+function hell(value, cb) {
+  cb(value);
 }
 
-
-
-let arr = [1, 2, 3, 4];
-// let sum = arr.map(x=> x + 2);
-let sum = arr.myMap(x => x + 2);
-console.log(sum)
-// console.log(arr)
+// Không sử dụng Promise dẫn đến tạo ra callback hell 
+hell(1, function (valueFromA) {
+  hell(valueFromA + 1, function (valueFromB) {
+    hell(valueFromB + 1, function (valueFromC) {
+      hell(valueFromC + 1, function (valueFromD) {
+        console.log(valueFromD + 1);
+      });
+    });
+  });
+});
